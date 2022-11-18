@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+
 var indexRouter = require('./controllers/index');
 var usersRouter = require('./controllers/users');
 
@@ -26,6 +28,23 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
+//Connecting to Mongo DB
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+//Using Mongoose library
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.DATABASE_URL)
+  .then((res) => {
+    console.log('Connected to MongoDB')
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+
 
 // error handler
 app.use(function(err, req, res, next) {
