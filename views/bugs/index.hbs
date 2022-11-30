@@ -1,0 +1,22 @@
+<h1>Bugs Created</h1>
+{{!-- {{#if user}} --}}
+    <a href="/bugs/create" class="btn btn-secondary">Add a New Bug</a>
+{{!-- {{/if}} --}}
+<section class="row">
+    {{#each bugs}}
+        <div class="card col-3 m-2">
+            <div class="card-body text-center h-200">
+                <h3 class="card-title">Title: {{this.title}}</h3>
+                <p class="card-text">Priority: {{this.priority}}</p>
+                <p class="card-text">Created by: {{this.creator}}</p>
+                <p class="crad-text">Status: {{this.status}}</p>
+                {{!-- {{#if ../user}} --}}
+                    <div>
+                        <a href="/bugs/edit/{{this._id}}">Edit</a>
+                        <a href="/bugs/delete/{{this._id}}" class="text-danger" onclick="return confirmDelete()">Delete</a>
+                    </div> 
+                {{!-- {{/if}} --}}
+            </div>
+        </div>
+    {{/each}}
+</section>
