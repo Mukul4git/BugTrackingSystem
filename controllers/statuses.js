@@ -12,7 +12,8 @@ router.get('/', (req, res) => {
         }
         else {
             res.render('statuses/index', {
-                statuses: statuses
+                statuses: statuses,
+                user: req.user
             })
         }
     })
@@ -20,7 +21,9 @@ router.get('/', (req, res) => {
 
 // GET: /categories/create => display empty form to enter a new place
 router.get('/create', (req, res) => {
-    res.render('statuses/create')
+    res.render('statuses/create',{
+            user: req.user
+    })
 })
 
 // POST: /statuses/create => process form submission to add new place

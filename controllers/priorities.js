@@ -12,7 +12,8 @@ router.get('/', (req, res) => {
         }
         else {
             res.render('priorities/index', {
-                priorities: priorities
+                priorities: priorities,
+                user: req.user
             })
         }
     })

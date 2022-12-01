@@ -20,7 +20,8 @@ router.get('/', (req, res) => {
         else {
             res.render('bugs/index', {
                 bugs: bugs,
-                title: 'List of our Bugs'
+                title: 'List of our Bugs',
+                user: req.user
             })
         }
     })
@@ -42,7 +43,8 @@ router.get('/create', (req, res) => {
                         res.render('bugs/create', {
                             title: 'Add a Bug',
                             priorities: priorities,
-                            statuses: statuses
+                            statuses: statuses,
+                            user: req.user
                         })
                     }
                 })
@@ -101,7 +103,8 @@ router.get('/edit/:_id', (req, res) => {
                                 title: 'Add a Bug',
                                 bug: bug,
                                 priorities: priorities,
-                                statuses: statuses
+                                statuses: statuses,
+                                user: req.user
                             })
                         }
                     })

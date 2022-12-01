@@ -5,6 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+// auth packages
+const passport = require('passport')
+const session = require('express-session')
+
+
 var app = express();
 
 //Connecting to Mongo DB
@@ -30,6 +35,25 @@ var bugs = require('./controllers/bugs')
 var priorities = require('./controllers/priorities')
 var statuses = require('./controllers/statuses')
 var auth = require('./controllers/auth')
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  save: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+// tell passport which model is handling the users. It uses the local strategy by default
+const User = require('./models/user')
+passport.use(User.createStrategy())
+
+
+// read/write users to/from session object using passport-local-mongoose
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
