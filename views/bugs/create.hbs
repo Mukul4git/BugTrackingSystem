@@ -4,20 +4,24 @@
         <label for="title" class="col-2">Title: *</label>
         <input name="title" id="title" required />
     </fieldset>
-    <select name="priority" id="priority" required> 
+    <label for="priority"> Priority:
+    <select name="priority" id="priority" required style="margin-left: 7rem;"> 
             {{#each priorities}}
                 <option>{{this.name}}</option>
             {{/each}} 
     </select>
+    </label>
     <fieldset>
         <label for="creator" class="col-2">Creator: *</label>
         <input name="creator" id="creator" required />
     </fieldset>
-    <select name="status" id="status" required> 
+    <label for="status"> Status: 
+    <select name="status" id="status" required style="margin-left: 7rem">
             {{#each statuses}}
                 <option>{{this.name}}</option>
             {{/each}}
     </select>
+    </label>
     <fieldset>
         <label for="type" class="col-2">Type: *</label>
         <input name="type" id="type" required />

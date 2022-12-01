@@ -50,9 +50,32 @@ const User = require('./models/user')
 passport.use(User.createStrategy())
 
 
+
+
+
 // read/write users to/from session object using passport-local-mongoose
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
+
+
+var googleStrategy = require('passport-google-oauth20').Strategy;
+
+passport.use(new googleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+  },
+
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ oauthId: profile.id }, {
+      username: profile.displayName,
+      oauthProvider: 'Google',
+      created: Date.now()
+    }, (err,user)=>{
+      return done(err,user);
+    });
+  }
+));
 
 
 // view engine setup

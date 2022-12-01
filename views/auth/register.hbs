@@ -29,10 +29,14 @@
       type="password"
       required
       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-    />
+      onkeyup="return comparePassword()"  />
+    <span id="pwMsg"></span>
   </fieldset>
   <fieldset class="form-group">
-    <button class="btn btn-info offset-3">Register</button>
+    <button class="btn btn-info offset-3" onclick="return comparePassword()">Register</button>
+    <a href="/auth/google">
+    <img src="/images/google.png">
+    </a>
     <hr />
     Already have an account?
     <a href="/auth/login" title="Login">Login</a>

@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+const passport = require('passport')
+
 // import bug model for CRUD
 const Bug = require('../models/bug')
 const priority = require('../models/priority')
@@ -8,6 +10,17 @@ const priority = require('../models/priority')
 // import priority & status model for form dropdowns
 const Priority = require('../models/priority')
 const Status = require('../models/status')
+
+
+//Auth Check 
+function isAuthenticated(req,res,next){
+    if(req.isAuthenticated()){
+        return next() //next lets user continue the next operation
+    }
+    else{
+        res.redirect('/auth/login')
+    }
+}
 
 
 // GET: /bugs => list all bugs in db
@@ -28,7 +41,7 @@ router.get('/', (req, res) => {
 })
 
 // GET: /bugs/create => display empty form to enter a new bug
-router.get('/create', (req, res) => {
+router.get('/create',isAuthenticated ,(req, res) => {
 
         Status.find((err,statuses)=>{
             if(err){
@@ -56,7 +69,7 @@ router.get('/create', (req, res) => {
 
  
 // POST: /places/create => process form submission to add new bug
-router.post('/create', (req, res) => {
+router.post('/create',isAuthenticated ,(req, res) => {
     // use Mongoose model to create new document from form values
     Bug.create(req.body, (err, bug) => {
         if (err) {
@@ -70,7 +83,7 @@ router.post('/create', (req, res) => {
 })
 
 //GET: /places/delete/abc123 => delete selected place document : in url indicates a parameter value
-router.get('/delete/:_id', (req, res) => {
+router.get('/delete/:_id',isAuthenticated, (req, res) => {
     // use Mongoose to delete selected doc & redirect
     Bug.remove({ _id: req.params._id }, (err) => {
         if (err) {
@@ -83,7 +96,7 @@ router.get('/delete/:_id', (req, res) => {
 })
 
 // GET: /places/edit/abc123 => display populated form to edit a place
-router.get('/edit/:_id', (req, res) => {
+router.get('/edit/:_id',isAuthenticated, (req, res) => {
     Bug.findById(req.params._id, (err, bug) => {
         if (err) {
             console.log(err)

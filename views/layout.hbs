@@ -5,12 +5,18 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <script src="./javascript/script.js"></script>
+    
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+   <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
   </head>
   <body>
@@ -19,15 +25,24 @@
 
       <!-- SideBar Code from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sidebar_responsive--> 
   <div class="sidebar">
+  {{#if user}}
+
   <a class="active" href="/">Bug Tracker</a>
   <a href="/bugs">DashBoard</a>
   <a href="/bugs/create">Create a Bug</a>
   <a href="/priorities">Manage Priorities</a>
   <a href="/statuses">Manage Status</a>
+
+  {{else}}
+
+  <a class="active" href="/">Bug Tracker</a>
+  <a href="/bugs">DashBoard</a>
+
+  {{/if}}
 </div>
 
 <div class="mynavbar" >
-  <nav class="navbar navbar-expand-lg" style="background-color: #05386B;">
+  <nav class="navbar navbar-expand-lg" style="background-color: #FC4445;">
     <div class="ms-auto navbar-nav">
       {{#if user}}
 
