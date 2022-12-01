@@ -1,0 +1,16 @@
+<h1>Priorities</h1>
+<a href="/priorities/create" class = "btn btn-secondary">Add new Priority</a>
+<section class="row">
+    {{#each priorities}}
+        <div class="card col-3 m-2">
+            <div class="card-body text-center h-200">
+                <h5 class="card-title">{{this.name}}</h5>
+
+            <div>
+                <a href="/priorities/delete/{{this._id}}" class="text-danger" onclick="return confirmDelete()">Delete</a>
+            </div> 
+
+            </div>
+        </div>
+    {{/each}}
+</section>

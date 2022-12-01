@@ -14,7 +14,7 @@ a {
   margin: 0rem;
   padding: 0;
   width: 12rem;
-  background-color: #167663;
+  background-color: #105d4d;
   position: fixed;
   height: 100%;
   overflow: auto;
@@ -67,3 +67,10 @@ div.content {
   height: 3rem;
 }
 
+.page{
+  display: grid;
+}
+
+.mynavbar{
+  padding-left: 12rem;
+}

@@ -27,7 +27,9 @@ var usersRouter = require('./controllers/users');
 
 // ref to our new controllers
 var bugs = require('./controllers/bugs')
-
+var priorities = require('./controllers/priorities')
+var statuses = require('./controllers/statuses')
+var auth = require('./controllers/auth')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,8 +46,9 @@ app.use('/users', usersRouter);
 
 // map any requests with /bugs in url to the bugs controller
 app.use('/bugs', bugs)
-
-
+app.use('/priorities', priorities)
+app.use('/statuses', statuses)
+app.use('/auth', auth)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

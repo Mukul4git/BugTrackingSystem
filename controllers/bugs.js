@@ -3,6 +3,11 @@ const router = express.Router()
 
 // import bug model for CRUD
 const Bug = require('../models/bug')
+const priority = require('../models/priority')
+
+// import priority & status model for form dropdowns
+const Priority = require('../models/priority')
+const Status = require('../models/status')
 
 
 // GET: /bugs => list all bugs in db
@@ -23,11 +28,28 @@ router.get('/', (req, res) => {
 
 // GET: /bugs/create => display empty form to enter a new bug
 router.get('/create', (req, res) => {
-        
-            res.render('bugs/create', {
-                title: 'Add a Bug'
-            })
+
+        Status.find((err,statuses)=>{
+            if(err){
+                console.log(err)
+            }
+            else{
+                Priority.find((err, priorities)=>{
+                    if(err){
+                        console.log(err)
+                    }
+                    else{
+                        res.render('bugs/create', {
+                            title: 'Add a Bug',
+                            priorities: priorities,
+                            statuses: statuses
+                        })
+                    }
+                })
+            }
         })
+        
+    })
 
 
  
@@ -65,17 +87,26 @@ router.get('/edit/:_id', (req, res) => {
             console.log(err)
         }
         else {
-            res.render('bugs/edit', {
-                        title: 'Place Details',
-                        bug: bug
-                        // title: req.title,
-                        // priority: req.priority,
-                        // creator: req.creator,
-                        // status: req.status,
-                        // type: req.type,
-                        // desciption: req.desciption,
-                        // solution: req.solution
+            Status.find((err,statuses)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    Priority.find((err, priorities)=>{
+                        if(err){
+                            console.log(err)
+                        }
+                        else{
+                            res.render('bugs/edit', {
+                                title: 'Add a Bug',
+                                bug: bug,
+                                priorities: priorities,
+                                statuses: statuses
+                            })
+                        }
                     })
+                }
+            })
                 }
             })   
         })

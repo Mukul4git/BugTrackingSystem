@@ -1,0 +1,14 @@
+<h1>Status</h1>
+<a href="/statuses/create" class = "btn btn-secondary">Add new Status of a Ticket</a>
+<section class="row">
+    {{#each statuses}}
+        <div class="card col-3 m-2">
+            <div class="card-body text-center h-200">
+                <h5 class="card-title">{{this.name}}</h5>
+            <div>
+                <a href="/statuses/delete/{{this._id}}" class="text-danger" onclick="return confirmDelete()">Delete</a>
+            </div> 
+        </div>
+        </div>
+    {{/each}}
+</section>
